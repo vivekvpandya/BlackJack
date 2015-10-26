@@ -18,7 +18,6 @@
         <file>28.png</file>
         <file>29.png</file>
         <file>31.png</file>
-        <file>32.png</file>
         <file>33.png</file>
         <file>34.png</file>
         <file>35.png</file>
@@ -52,5 +51,7 @@
         <file>412.png</file>
         <file>413.png</file>
         <file>back.png</file>
+        <file>22.png</file>
+        <file>32.png</file>
     </qresource>
 </RCC>

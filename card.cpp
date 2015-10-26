@@ -17,8 +17,10 @@ Card::Card()
         int value = 0;
         if (isFaceUp)
         {
-            //value is number showing on card
-            value = rank;
+            if(rank > 10)
+                value = 10;
+            else
+                value = rank;
 
     }
         return value;

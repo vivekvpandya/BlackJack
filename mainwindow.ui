@@ -45,7 +45,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">backgroud:rgb(46, 127, 214)</string>
+      <string notr="true">background:rgb(46, 127, 214)</string>
      </property>
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">

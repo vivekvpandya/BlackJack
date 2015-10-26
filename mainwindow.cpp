@@ -3,6 +3,8 @@
 #include "card.h"
 #include "carddrawing.h"
 #include "deck.h"
+#include "player.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,35 +16,39 @@ MainWindow::MainWindow(QWidget *parent) :
     Deck newDeck = Deck();
     Card randomCard = newDeck.popRandomCard();
 
-    CardDrawing *cardDraw = new CardDrawing();
-    QPixmap pix = QPixmap(QString::fromStdString(randomCard.convert()));
-    cardDraw->drawWithPixmap(pix);
-    ui->player1Layout->addWidget(cardDraw);
-    Card randomCard2 = newDeck.popRandomCard();
-
-    CardDrawing *cardDraw2 = new CardDrawing();
-    QPixmap pix2 = QPixmap(QString::fromStdString(randomCard2.convert()));
-    cardDraw2->drawWithPixmap(pix2);
-    ui->player1Layout->addWidget(cardDraw2);
-
-
-    Card randomCard3 = newDeck.popRandomCard();
-    CardDrawing *cardDraw3 = new CardDrawing();
-    QPixmap pix3 = QPixmap(QString::fromStdString(randomCard3.convert()));
-    cardDraw3->drawWithPixmap(pix3);
-    ui->player1Layout->addWidget(cardDraw3);
-
-    Card randomCard4 = newDeck.popRandomCard();
-    CardDrawing *cardDraw4 = new CardDrawing();
-    QPixmap pix4 = QPixmap(QString::fromStdString(randomCard4.convert()));
-    cardDraw4->drawWithPixmap(pix4);
-    ui->player1Layout->addWidget(cardDraw4);
-
 //    Card randomCard5 = newDeck.popRandomCard();
 //    CardDrawing *cardDraw5 = new CardDrawing();
 //    QPixmap pix5 = QPixmap(QString::fromStdString(randomCard5.convert()));
 //    cardDraw2->drawWithPixmap(pix5);
 //    ui->player1Layout->addWidget(cardDraw5);
+
+    Player player = Player("Vivek");
+    player.setUnique_num(1);
+    for(int i =0; i<43 ;i++)
+        newDeck.popRandomCard();
+    player.addCardToHand(newDeck.popRandomCard());
+    player.addCardToHand(newDeck.popRandomCard());
+    player.addCardToHand(newDeck.popRandomCard());
+    player.addCardToHand(newDeck.popRandomCard());
+
+
+
+    std::vector<Card> * playerHand = player.getCardHand();
+    for(int itereator = 0; itereator!= playerHand->size(); itereator++){
+        Card card = playerHand->at(itereator);
+        qDebug()<<card.getValue()<<"\n";
+        CardDrawing *cardDrawing = new CardDrawing();
+        QPixmap pixmap = QPixmap(QString::fromStdString(card.convert()));
+        cardDrawing->drawWithPixmap(pixmap);
+        ui->player1Layout->addWidget(cardDrawing);
+    }
+
+    // To hide remaining player name
+    ui->player2Name->hide();
+    ui->player3Name->hide();
+    ui->player4Name->hide();
+    ui->player5Name->hide();
+    ui->player1Name->setText(player.getName());
 
 
 }

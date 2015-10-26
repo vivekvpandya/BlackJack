@@ -3,10 +3,10 @@
 
 Deck::Deck()
 {
-    for(int suitID = Suit::SPADES ; suitID != Suit::CLUBS ; suitID++)
+    for(int suitID = Suit::SPADES ; suitID <= Suit::CLUBS ; suitID++)
     {
         Suit suit = static_cast<Suit>(suitID);
-        for(int rankID = Rank::ACE; rankID != Rank::KING; rankID++)
+        for(int rankID = Rank::ACE; rankID <= Rank::KING; rankID++)
         {
             Rank rank = static_cast<Rank>(rankID);
             Card card = Card(rank,suit,true);

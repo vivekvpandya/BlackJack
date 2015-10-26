@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,16 +17,21 @@ SOURCES += main.cpp\
     card.cpp \
     carddrawing.cpp \
     deck.cpp \
-    player.cpp
+    player.cpp \
+    connectionwindow.cpp \
+    networkoperationmanager.cpp
 
 HEADERS  += mainwindow.h \
     card.h \
     carddrawing.h \
     deck.h \
-    player.h
+    player.h \
+    connectionwindow.h \
+    networkoperationmanager.h
 
 FORMS    += mainwindow.ui \
-    carddrawing.ui
+    carddrawing.ui \
+    connectionwindow.ui
 
 RESOURCES += \
     resources.qrc
