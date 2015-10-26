@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1048</width>
-    <height>807</height>
+    <height>866</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <x>-1</x>
       <y>-1</y>
       <width>1051</width>
-      <height>741</height>
+      <height>791</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
@@ -41,7 +41,7 @@
        <x>0</x>
        <y>0</y>
        <width>1033</width>
-       <height>723</height>
+       <height>773</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -112,7 +112,7 @@
       <property name="geometry">
        <rect>
         <x>18</x>
-        <y>295</y>
+        <y>290</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -128,7 +128,7 @@
       <property name="geometry">
        <rect>
         <x>558</x>
-        <y>295</y>
+        <y>290</y>
         <width>81</width>
         <height>31</height>
        </rect>
@@ -177,7 +177,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>515</y>
+        <y>510</y>
         <width>81</width>
         <height>31</height>
        </rect>
@@ -189,6 +189,242 @@
        <string>Player5:</string>
       </property>
      </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>890</x>
+        <y>260</y>
+        <width>141</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="player2Hit">
+         <property name="text">
+          <string>Hit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="player2Fold">
+         <property name="text">
+          <string>Fold</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>500</y>
+        <width>141</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="player3Hit">
+         <property name="text">
+          <string>Hit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="player3Fold">
+         <property name="text">
+          <string>Fold</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>890</x>
+        <y>500</y>
+        <width>141</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QPushButton" name="player4Hit">
+         <property name="text">
+          <string>Hit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="player4Fold">
+         <property name="text">
+          <string>Fold</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>730</y>
+        <width>141</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QPushButton" name="player5Hit">
+         <property name="text">
+          <string>Hit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="player5Fold">
+         <property name="text">
+          <string>Fold</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="player1timer">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>40</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255, 255, 255);font: 24pt &quot;Marker Felt&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10 sec</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player2timer">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>40</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255, 255, 255);font: 24pt &quot;Marker Felt&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10 sec</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player3timer">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>290</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255, 255, 255);font: 24pt &quot;Marker Felt&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10 sec</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player4timer">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>290</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255, 255, 255);font: 24pt &quot;Marker Felt&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10 sec</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="player5timer">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>510</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(255, 255, 255);font: 24pt &quot;Marker Felt&quot;;</string>
+      </property>
+      <property name="text">
+       <string>10 sec</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>381</x>
+        <y>260</y>
+        <width>141</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="player1Hit">
+         <property name="text">
+          <string>Hit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="player1Fold">
+         <property name="text">
+          <string>Fold</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <zorder>horizontalLayoutWidget</zorder>
+     <zorder>player1Name</zorder>
+     <zorder>player2Name</zorder>
+     <zorder>horizontalLayoutWidget_2</zorder>
+     <zorder>player3Name</zorder>
+     <zorder>player4Name</zorder>
+     <zorder>horizontalLayoutWidget_3</zorder>
+     <zorder>horizontalLayoutWidget_4</zorder>
+     <zorder>horizontalLayoutWidget_5</zorder>
+     <zorder>player5Name</zorder>
+     <zorder>pushButton</zorder>
+     <zorder>pushButton_2</zorder>
+     <zorder>pushButton_2</zorder>
+     <zorder>pushButton</zorder>
+     <zorder>pushButton_2</zorder>
+     <zorder>player1Fold</zorder>
+     <zorder>player1Hit</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>layoutWidget_2</zorder>
+     <zorder>layoutWidget_3</zorder>
+     <zorder>layoutWidget_4</zorder>
+     <zorder>player1timer</zorder>
+     <zorder>player2timer</zorder>
+     <zorder>player3timer</zorder>
+     <zorder>player4timer</zorder>
+     <zorder>player5timer</zorder>
     </widget>
    </widget>
   </widget>
