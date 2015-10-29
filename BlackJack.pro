@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     player.cpp \
     connectionwindow.cpp \
     networkoperationmanager.cpp \
-    table.cpp
+    table.cpp \
+    gridlayout.cpp \
+    playerdrawing.cpp
 
 HEADERS  += mainwindow.h \
     card.h \
@@ -29,11 +31,15 @@ HEADERS  += mainwindow.h \
     player.h \
     connectionwindow.h \
     networkoperationmanager.h \
-    table.h
+    table.h \
+    gridlayout.h \
+    playerdrawing.h
 
 FORMS    += mainwindow.ui \
     carddrawing.ui \
-    connectionwindow.ui
+    connectionwindow.ui \
+    gridlayout.ui \
+    playerdrawing.ui
 
 RESOURCES += \
     resources.qrc

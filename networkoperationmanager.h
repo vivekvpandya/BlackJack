@@ -13,6 +13,7 @@ public:
     QString networkConnectionError();
 
 
+
 private:
     QUdpSocket multicastSocket;
     QTcpSocket connectionSocket;

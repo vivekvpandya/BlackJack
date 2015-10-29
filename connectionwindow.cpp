@@ -1,13 +1,14 @@
 #include "connectionwindow.h"
 #include "ui_connectionwindow.h"
 #include "networkoperationmanager.h"
+#include <QMessageBox>
 
 ConnectionWindow::ConnectionWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ConnectionWindow)
 {
     ui->setupUi(this);
-    networkOperationManger = NetworkOperationManager();
+
 }
 
 ConnectionWindow::~ConnectionWindow()
@@ -27,7 +28,8 @@ void ConnectionWindow::on_pushButton_clicked()
         nickerror.exec();
         return;
     }
-    networkOperationManger.connectToHost(ipAddr,portNum);
+
+    networkOperationManger.connectToHost(QHostAddress(hostAddress),portNum);
     if(networkOperationManger.isConnected()){
 
     }
@@ -41,4 +43,4 @@ void ConnectionWindow::on_pushButton_clicked()
     }
 
 
-}
+
