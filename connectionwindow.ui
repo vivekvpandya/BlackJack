@@ -35,7 +35,7 @@
     <property name="title">
      <string>TableManager Connection Settings</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -56,7 +56,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="ipAddr"/>
       </item>
       <item>
        <widget class="QLabel" name="label_2">
@@ -69,7 +69,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_2"/>
+       <widget class="QLineEdit" name="portNo"/>
       </item>
       <item>
        <widget class="QLabel" name="label_3">
@@ -82,7 +82,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_3"/>
+       <widget class="QLineEdit" name="nickName"/>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
@@ -112,13 +112,13 @@
     <property name="title">
      <string>Available Table List</string>
     </property>
-    <widget class="QListView" name="listView">
+    <widget class="QListWidget" name="tableListWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>30</y>
-       <width>361</width>
-       <height>441</height>
+       <y>31</y>
+       <width>351</width>
+       <height>431</height>
       </rect>
      </property>
      <property name="styleSheet">

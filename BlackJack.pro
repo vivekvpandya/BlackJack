@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     deck.cpp \
     player.cpp \
     connectionwindow.cpp \
-    networkoperationmanager.cpp
+    networkoperationmanager.cpp \
+    table.cpp
 
 HEADERS  += mainwindow.h \
     card.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     deck.h \
     player.h \
     connectionwindow.h \
-    networkoperationmanager.h
+    networkoperationmanager.h \
+    table.h
 
 FORMS    += mainwindow.ui \
     carddrawing.ui \

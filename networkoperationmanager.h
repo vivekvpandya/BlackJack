@@ -9,6 +9,9 @@ public:
     NetworkOperationManager();
     qint64 multicastDatagram(const QByteArray &datagram, const QHostAddress &host, quint16 port);
     void connectToHost(const QHostAddress &address, quint16 port); // This is for TCPSocket
+    bool isConnected();
+    QString networkConnectionError();
+
 
 private:
     QUdpSocket multicastSocket;

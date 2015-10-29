@@ -24,3 +24,4 @@ QString NetworkOperationManager::networkConnectionError()
 {
     return connectionSocket.errorString();
 }
+
