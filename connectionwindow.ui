@@ -56,7 +56,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="ipAddr"/>
+       <widget class="QLineEdit" name="ipAddr">
+        <property name="text">
+         <string>127.0.0.1</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_2">
@@ -69,7 +73,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="portNo"/>
+       <widget class="QLineEdit" name="portNo">
+        <property name="text">
+         <string>15000</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="label_3">
@@ -82,7 +90,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="nickName"/>
+       <widget class="QLineEdit" name="nickName">
+        <property name="text">
+         <string>Jatu</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">

@@ -2,7 +2,9 @@
 #define CONNECTIONWINDOW_H
 
 #include <QMainWindow>
-#include "networkoperationmanager.h"
+#include <QTcpSocket>
+#include <QHash>
+#include "table.h"
 
 namespace Ui {
 class ConnectionWindow;
@@ -18,11 +20,17 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-    void updateAvailableTableList(std::vector<Table> tableDetails);
+   // void updateAvailableTableList(std::vector<Table> tableDetails);
+    void connected();
+    void disconnected();
+    void readyRead();
+    void displayError(QAbstractSocket::SocketError socketError);
 
 private:
     Ui::ConnectionWindow *ui;
-    NetworkOperationManager networkOperationManger;
+    QTcpSocket *socket;
+    QString nickNameStr;
+    QHash<QString, Table> tables;
 };
 
 #endif // CONNECTIONWINDOW_H

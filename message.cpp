@@ -106,11 +106,15 @@ QDataStream &  operator >>(QDataStream & stream, Message &message){
     for(int i=0; i<numberOfTables; i++)
     {
         stream >> tableObj;
+
         message.insertTable(tableObj);
     }
     for(int i=0; i<numberOfCards; i++)
     {
         stream >> cardObj;
+        qDebug() << cardObj.getRank();
+        qDebug() << cardObj.getSuit();
+        qDebug() << cardObj.getFaceUp();
         message.insertCard(cardObj);
     }
     return stream;
