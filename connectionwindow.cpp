@@ -8,7 +8,7 @@ ConnectionWindow::ConnectionWindow(QWidget *parent) :
     ui(new Ui::ConnectionWindow)
 {
     ui->setupUi(this);
-
+    connect(&networkOperationManger,SIGNAL(tableDetailsAvailable(std::vector<Table>)),this,SLOT(updateAvailableTableList(std::vector<Table>)));
 }
 
 ConnectionWindow::~ConnectionWindow()
@@ -31,7 +31,7 @@ void ConnectionWindow::on_pushButton_clicked()
 
     networkOperationManger.connectToHost(QHostAddress(hostAddress),portNum);
     if(networkOperationManger.isConnected()){
-
+        networkOperationManger.requestTableList();
     }
     else{
         QMessageBox networkError;
@@ -42,5 +42,13 @@ void ConnectionWindow::on_pushButton_clicked()
 
     }
 
+void ConnectionWindow::updateAvailableTableList(std::vector<Table> tableDetails)
+{   qDebug() << "HEre";
+    for(Table table:tableDetails)
+    {   qDebug() << table.getTableName();
+        ui->tableListWidget->addItem(table.getTableName());
+    }
+
+}
 
 

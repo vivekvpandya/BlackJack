@@ -18,6 +18,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void updateAvailableTableList(std::vector<Table> tableDetails);
 
 private:
     Ui::ConnectionWindow *ui;

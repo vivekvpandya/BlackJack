@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+class Card;
+
 namespace Ui {
 class PlayerDrawing;
 }
@@ -14,7 +16,8 @@ class PlayerDrawing : public QWidget
 public:
     explicit PlayerDrawing(QWidget *parent = 0);
     ~PlayerDrawing();
-
+    void setPlayerName(QString name);
+    void addCardtoStack(Card card);
 private:
     Ui::PlayerDrawing *ui;
 };

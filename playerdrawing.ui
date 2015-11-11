@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>522</width>
     <height>230</height>
    </rect>
   </property>
@@ -18,13 +18,13 @@
     <rect>
      <x>10</x>
      <y>50</y>
-     <width>581</width>
+     <width>501</width>
      <height>131</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
-  <widget class="QLabel" name="playerTimer">
+  <widget class="QLabel" name="playerName">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -40,7 +40,7 @@
   <widget class="QPushButton" name="hitButton">
    <property name="geometry">
     <rect>
-     <x>382</x>
+     <x>297</x>
      <y>190</y>
      <width>101</width>
      <height>41</height>
@@ -53,7 +53,7 @@
   <widget class="QPushButton" name="foldButton">
    <property name="geometry">
     <rect>
-     <x>495</x>
+     <x>410</x>
      <y>190</y>
      <width>101</width>
      <height>41</height>
@@ -63,10 +63,10 @@
     <string>Fold</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="playerTimer">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>340</x>
      <y>20</y>
      <width>171</width>
      <height>16</height>

@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     networkoperationmanager.cpp \
     table.cpp \
     gridlayout.cpp \
-    playerdrawing.cpp
+    playerdrawing.cpp \
+    message.cpp
 
 HEADERS  += mainwindow.h \
     card.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     networkoperationmanager.h \
     table.h \
     gridlayout.h \
-    playerdrawing.h
+    playerdrawing.h \
+    message.h
 
 FORMS    += mainwindow.ui \
     carddrawing.ui \
