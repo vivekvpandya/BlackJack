@@ -26,6 +26,8 @@ private slots:
     void readyRead();
     void displayError(QAbstractSocket::SocketError socketError);
 
+    void on_tableListWidget_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::ConnectionWindow *ui;
     QTcpSocket *socket;

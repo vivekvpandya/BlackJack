@@ -46,6 +46,16 @@ void Message::insertCard(Card card){
     cards.push_back(card);
 }
 
+void Message::insertPlayer(Player player)
+{
+    players.push_back(player);
+}
+
+std::vector<Player> Message::getPlayers() const
+{
+    return players;
+}
+
 QDataStream & operator <<( QDataStream & stream, const MessageType &type){
 
     return stream <<(int) type;
@@ -61,26 +71,43 @@ QDataStream & operator >>(QDataStream & stream, MessageType & type){
 QDataStream & operator <<(QDataStream & stream, const Message &message){
 
     stream << message.getMessageType();
+
     std::vector<QString> dataStrings = message.getDataStrings();
     int dataStringsSize = dataStrings.size();
+
     stream << dataStringsSize;
+
     std::vector<Table> tables = message.getTableDetails();
     int numberoOftables = tables.size();
+
     stream << numberoOftables;
+
     std::vector<Card> cards = message.getCards();
     int numberOfCards = cards.size();
+
     stream << numberOfCards;
-    for(std::vector<QString>::iterator i = dataStrings.begin(); i != dataStrings.end() ; i++)
+
+    std::vector<Player> playersVector = message.getPlayers();
+    int numberOfPlayers = playersVector.size();
+
+    stream << numberOfPlayers;
+
+    for(QString str : dataStrings)
     {
-        stream << *i;
+        stream << str;
     }
-    for(std::vector<Table>::iterator i = tables.begin(); i != tables.end(); i++)
-    {
-        stream << *i;
+    for(Table table: tables)
+     {
+                  stream << table;
     }
-    for(std::vector<Card>::iterator i = cards.begin(); i != cards.end(); i++)
+    for(Card card: cards)
+        {
+                  stream << card;
+    }
+
+    for(Player player : playersVector)
     {
-        stream << *i;
+        stream << player;
     }
     return stream;
 }
@@ -89,15 +116,23 @@ QDataStream &  operator >>(QDataStream & stream, Message &message){
     MessageType mtype;
     QString stringObj;
     Table tableObj;
+    Player playerObj;
     Card cardObj = Card();
     int dataStringsSize;
     int numberOfTables;
     int numberOfCards;
+    int numberOfPlayers;
     stream >> mtype;
+
     stream >> dataStringsSize;
+
     stream >> numberOfTables;
+
     stream >> numberOfCards;
+    stream >> numberOfPlayers;
+
     message.setMessageType(mtype);
+
     for(int i=0;i<dataStringsSize;i++)
     {
         stream>>stringObj;
@@ -106,17 +141,19 @@ QDataStream &  operator >>(QDataStream & stream, Message &message){
     for(int i=0; i<numberOfTables; i++)
     {
         stream >> tableObj;
-
         message.insertTable(tableObj);
     }
     for(int i=0; i<numberOfCards; i++)
     {
         stream >> cardObj;
-        qDebug() << cardObj.getRank();
-        qDebug() << cardObj.getSuit();
-        qDebug() << cardObj.getFaceUp();
         message.insertCard(cardObj);
     }
+    for(int j = 0; j < numberOfPlayers; j++ )
+    {
+        stream >> playerObj;
+        message.insertPlayer(playerObj);
+    }
+
     return stream;
 }
 

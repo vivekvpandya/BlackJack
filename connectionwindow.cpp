@@ -2,6 +2,7 @@
 #include "ui_connectionwindow.h"
 #include "message.h"
 #include "table.h"
+#include "gridlayout.h"
 #include <QMessageBox>
 
 ConnectionWindow::ConnectionWindow(QWidget *parent) :
@@ -30,6 +31,7 @@ void ConnectionWindow::on_pushButton_clicked()
     QString portNumber = ui->portNo->text();
     qint64 portNum = portNumber.toLongLong();
     QString nickNameStr = ui->nickName->text();
+    ConnectionWindow::nickNameStr = nickNameStr;
     if (nickNameStr.isEmpty() == true){
         QMessageBox nickerror;
         nickerror.setText("Nick Name is compulsory");
@@ -114,7 +116,7 @@ void ConnectionWindow::disconnected(){
 void ConnectionWindow::readyRead(){
 
     qDebug() << "Reading ... " <<'\n';
-    ui->tableListWidget->clear();
+
     quint16 blockSize=0;
     QDataStream in(socket);
     in.setVersion(QDataStream::Qt_5_5);
@@ -146,7 +148,7 @@ void ConnectionWindow::readyRead(){
     qDebug() << blockSize;
     MessageType mtype = message.getMessageType();
     if(mtype == MessageType::TableDetails){
-
+        ui->tableListWidget->clear();
         qDebug() << "TableDetails";
         std::vector<Table> tableVector = message.getTableDetails();
         for(Table table: tableVector){
@@ -157,6 +159,25 @@ void ConnectionWindow::readyRead(){
     else if (mtype == MessageType::GetTableDetails){
         qDebug() <<"GetRoomDetails";
         // Drop this message
+    }
+    else if(mtype == MessageType::AddedToTable)
+    {
+        std::vector<QString> cmd = message.getDataStrings();
+        qDebug() << nickNameStr << " has been added to " << cmd[0];
+        GridLayout *gird = new GridLayout(tables[cmd[0]],nickNameStr);
+        gird->show();
+
+
+
+        //this->hide(); This will be used to hide the connection window. But it requires a signal from GridLayout when it is closed.
+
+
+    }
+    else if(mtype == MessageType::TableOverFolw)
+    {   std::vector<QString> cmd = message.getDataStrings();
+        QMessageBox::information(this, tr("Black Jack"),
+                                 tr(": %1 table is full, please select some other table !")
+                                 .arg(cmd[0]));
     }
 
     std::vector<QString> strings = message.getDataStrings();
@@ -217,3 +238,24 @@ void ConnectionWindow::displayError(QAbstractSocket::SocketError socketError)
 
 }
 
+
+void ConnectionWindow::on_tableListWidget_doubleClicked(const QModelIndex &index)
+{
+    QString tableName = ui->tableListWidget->currentItem()->text();
+    Message message = Message(MessageType::JoinTable);
+    message.insertDataString(nickNameStr);
+    message.insertDataString(tableName);
+    QByteArray block;
+    QDataStream out(&block, QIODevice::ReadWrite);
+    out.setVersion(QDataStream::Qt_5_5);
+    out << (quint16)0;
+    out << message;
+    out.device()->seek(0);
+    out << (quint16)(block.size() - sizeof(quint16));
+    qDebug()<<QString(block);
+    socket->write(block);
+    socket->flush();
+    socket->waitForBytesWritten(3000);
+    qDebug()<<"JoinTable : sent!";
+    ui->statusInfo->setText("Request to join table " + tableName +" sent!");
+}

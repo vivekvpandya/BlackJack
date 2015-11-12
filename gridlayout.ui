@@ -18,12 +18,28 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>40</y>
       <width>1181</width>
-      <height>711</height>
+      <height>671</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout"/>
+   </widget>
+   <widget class="QLabel" name="gameStatus">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>351</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 16pt &quot;.SF NS Text&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Waiting for other players to join the table</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

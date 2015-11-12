@@ -32,5 +32,6 @@ void PlayerDrawing::addCardtoStack(Card card)
 
 void PlayerDrawing::enableHitFoldButton()
 {
-
+    ui->foldButton->setEnabled();
+    
 }

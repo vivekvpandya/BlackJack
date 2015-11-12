@@ -2,27 +2,33 @@
 #define MESSAGE_H
 #include <vector>
 #include <QDataStream>
+#include "table.h"
+#include "card.h"
+#include "player.h"
 
 
 enum class MessageType{
     GetTableDetails,
     TableDetails,
+    GameDetails,
     JoinTable,
     LeaveTable,
     Message,
     ChekNickAvailability,
     NickAvailable,
+    AddedToTable,
+    TableOverFolw,
     NickRegistered
 };
 
 QDataStream & operator <<( QDataStream & stream, const MessageType &type);
 QDataStream & operator >>(QDataStream & stream, MessageType & types);
 
-class Table;
-class Card;
+
 
 class Message
 {
+
 public:
     Message();
 
@@ -35,6 +41,8 @@ public:
     void insertTable(Table table);
     std::vector<Card> getCards() const;
     void insertCard(Card card);
+    void insertPlayer(Player player);
+    std::vector<Player> getPlayers() const;
 
 
 private:
@@ -42,6 +50,7 @@ private:
     std::vector<QString> dataStrings;
     std::vector<Table> tables;
     std::vector<Card> cards;
+    std::vector<Player> players;
 
 };
 

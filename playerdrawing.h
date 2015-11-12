@@ -18,6 +18,7 @@ public:
     ~PlayerDrawing();
     void setPlayerName(QString name);
     void addCardtoStack(Card card);
+    void enableHitFoldButton();
 private:
     Ui::PlayerDrawing *ui;
 };
