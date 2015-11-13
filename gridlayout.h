@@ -5,6 +5,7 @@
 #include <QUdpSocket>
 #include <QHostAddress>
 #include "table.h"
+#include "playerdrawing.h"
 
 namespace Ui {
 class GridLayout;
@@ -26,8 +27,11 @@ private:
     QString nickName;
     int unique_num;
     Table table;
+    QHash<QString,PlayerDrawing *> playerDrawings;
 private slots:
     void processPendingDatagrams();
+    void sendHitMessage();
+    void sendFoldMessage();
 };
 
 #endif // GRIDLAYOUT_H

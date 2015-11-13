@@ -32,5 +32,22 @@ void PlayerDrawing::addCardtoStack(Card card)
 
 void PlayerDrawing::enableHitFoldButton()
 {
+    ui->foldButton->setEnabled(true);
+    ui->hitButton->setEnabled(true);
+}
 
+void PlayerDrawing::disableHitFoldButton()
+{
+    ui->foldButton->setEnabled(false);
+    ui->hitButton->setEnabled(false);
+}
+
+void PlayerDrawing::on_hitButton_clicked()
+{
+    emit hitButtonPressed();
+}
+
+void PlayerDrawing::on_foldButton_clicked()
+{
+    emit foldButtonPressed();
 }

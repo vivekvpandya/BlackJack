@@ -33,11 +33,17 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">font: 16pt &quot;.SF NS Text&quot;;</string>
+   </property>
    <property name="text">
     <string>Player Name</string>
    </property>
   </widget>
   <widget class="QPushButton" name="hitButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>297</x>
@@ -51,6 +57,9 @@
    </property>
   </widget>
   <widget class="QPushButton" name="foldButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>410</x>
@@ -79,7 +88,7 @@
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="text">
-    <string>Timer:20 sec</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

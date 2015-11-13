@@ -4,6 +4,10 @@
 #include <QDataStream>
 #include <list>
 #include <QDebug>
+#include "message.h"
+#include <QUdpSocket>
+#include <QObject>
+
 Table::Table()
 {
 
@@ -14,6 +18,8 @@ Table::Table(int capacity_, QString tableName_, qint64 portNo_)
     tableName = tableName_;
     portNo = portNo_;
     waitForPalyer = true;
+
+
 
 }
 
@@ -77,16 +83,16 @@ int Table::numberofConnectedPlayer() const
     return connectedPalyer.size();
 }
 
-std::list<Player> * Table::getPlayerList()
+std::list<Player>  Table::getPlayerList()
 {
-    return &connectedPalyer;
+    return connectedPalyer;
 }
 
-void Table::addCardtoPlayeratIndex(Card card, int index)
-{
+int Table::addCardtoPlayeratIndex(Card card, int index)
+{   qDebug() << "Add Card to player";
     std::list<Player >::iterator playerIt = connectedPalyer.begin();
     std::advance(playerIt, index);
-    (*playerIt).addCardToHand(card);
+    return  (*playerIt).addCardToHand(card);
 }
 
 QDataStream & operator <<( QDataStream & stream, Table &table)
@@ -111,4 +117,42 @@ QDataStream & operator >>(QDataStream & stream, Table & table)
     table.setTableName(tableName);
     table.setWaitingForPlayer(isWaitingForPalyer);
     return stream;
+}
+
+
+
+bool Table::multicastGameInfo()
+{
+    if(numberofConnectedPlayer() == capacity)
+    {
+
+         return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int Table::addCardtoPlayerWithName(Card card, QString name)
+{   int returnVal = 0;
+    for(Player player : connectedPalyer)
+    {
+        if(name.compare(player.getName()) == 0)
+        {
+           returnVal = player.addCardToHand(card);
+        }
+    }
+    return returnVal;
+}
+
+void Table::foldPlayerWithName(QString name)
+{
+    for(Player player : connectedPalyer)
+    {
+        if(name.compare(player.getName()) == 0)
+        {
+            player.setFoldTrue();
+        }
+    }
 }

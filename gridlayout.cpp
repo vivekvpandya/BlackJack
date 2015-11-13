@@ -84,7 +84,7 @@ GridLayout::GridLayout(Table table_, QString nickName_, QWidget *parent) :
     ui(new Ui::GridLayout)
 {   ui->setupUi(this);
     table = table_;
-    nickName == nickName_;
+    nickName = nickName_;
     groupAddress = QHostAddress("239.255.43.21");
     udpSocket = new QUdpSocket();
     udpSocket->bind(QHostAddress::AnyIPv4,table.getPortNo(), QUdpSocket::ShareAddress);
@@ -116,6 +116,7 @@ void GridLayout::processPendingDatagrams()
            MessageType mtype = message.getMessageType();
            if(mtype == MessageType::GameDetails){
                // This will be one time message sent by Dealer when game begins
+               ui->gameStatus->clear();
                for(Player player : message.getPlayers()){
                    table.addPlayerToTable(player);
                }
@@ -127,8 +128,16 @@ void GridLayout::processPendingDatagrams()
                        Player player = *playerIt;
                        PlayerDrawing *playerDrwaing = new PlayerDrawing();
                        playerDrwaing->setPlayerName(player.getName());
-                       std::vector<Card> *playerHand = player.getCardHand();
-                       for(std::vector<Card>::iterator cardIt = playerHand->begin(); cardIt != playerHand->end() ; cardIt++ )
+                       qDebug() << nickName;
+                       qDebug() << player.getName();
+                       if(nickName.compare(player.getName()) == 0)
+                       {
+                           playerDrwaing->enableHitFoldButton();
+                           connect(playerDrwaing,SIGNAL(foldButtonPressed()),this,SLOT(sendFoldMessage()));
+                           connect(playerDrwaing,SIGNAL(hitButtonPressed()),this,SLOT(sendHitMessage()));
+                       }
+                       std::vector<Card> playerHand = player.getCardHand();
+                       for(std::vector<Card>::iterator cardIt = playerHand.begin(); cardIt != playerHand.end() ; cardIt++ )
                        {
                            playerDrwaing->addCardtoStack(*cardIt);
                        }
@@ -139,12 +148,38 @@ void GridLayout::processPendingDatagrams()
                            ui->gridLayout->addWidget(playerDrwaing,row,1);
                        row++;
                        }
-                   }
+                       playerDrawings.insert(player.getName(),playerDrwaing);
+               }
            }
            else if(mtype == MessageType::GetTableDetails)
            {
                qDebug() << "dropping GetTableDetails message";
            }
+           else if(mtype == MessageType::Card)
+           {
+               std::vector<QString> cmd = message.getDataStrings();
+               qDebug() << cmd.size() << "num of commands recived ";
+               PlayerDrawing *playerDrawing = playerDrawings[cmd[0]];
+               int foldStatus = cmd[1].toInt();
+               qDebug() << foldStatus <<"Fold status";
+               if(foldStatus == 0){
+                   std::vector<Card> cards = message.getCards();
+                   playerDrawing->addCardtoStack(cards[0]);
+               }
+               else if (foldStatus == 1)
+               {
+                   std::vector<Card> cards = message.getCards();
+                   playerDrawing->addCardtoStack(cards[0]);
+                   playerDrawing->disableHitFoldButton();
+                   table.foldPlayerWithName(cmd[0]);
+               }
+               else if( foldStatus == 2)
+               {
+                   table.foldPlayerWithName(cmd[0]);
+               }
+
+           }
+
     }
 }
 
@@ -152,4 +187,28 @@ void GridLayout::processPendingDatagrams()
 GridLayout::~GridLayout()
 {
     delete ui;
+}
+
+void GridLayout::sendFoldMessage()
+{   PlayerDrawing *playerDrawing = playerDrawings[nickName];
+    playerDrawing->disableHitFoldButton();
+    qDebug() << "sending fold message";
+    Message message = Message(MessageType::Fold); // A Hit Message
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_5);
+    message.insertDataString(nickName);
+    out << message;
+    udpSocket->writeDatagram(datagram, groupAddress, table.getPortNo());
+}
+void GridLayout::sendHitMessage()
+{
+    qDebug() << "sending hit message";
+    Message message = Message(MessageType::Hit); // A Hit Message
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_5);
+    message.insertDataString(nickName);
+    out << message;
+    udpSocket->writeDatagram(datagram, groupAddress, table.getPortNo());
 }

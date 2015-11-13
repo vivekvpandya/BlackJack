@@ -53,9 +53,9 @@ MainWindow::MainWindow(QWidget *parent) :
     gameDecider(&table);
 
 
-    std::vector<Card> * playerHand = player.getCardHand();
-    for(int itereator = 0; itereator!= playerHand->size(); itereator++){
-        Card card = playerHand->at(itereator);
+    std::vector<Card>  playerHand = player.getCardHand();
+    for(int itereator = 0; itereator!= playerHand.size(); itereator++){
+        Card card = playerHand.at(itereator);
         qDebug()<<card.getValue()<<"\n";
         CardDrawing *cardDrawing = new CardDrawing();
         QPixmap pixmap = QPixmap(QString::fromStdString(card.convert()));
@@ -63,9 +63,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->player1Layout->addWidget(cardDrawing);
     }
 
-    std::vector<Card> * player2Hand = player2.getCardHand();
-    for(int itereator = 0; itereator!= player2Hand->size(); itereator++){
-        Card card = player2Hand->at(itereator);
+    std::vector<Card>  player2Hand = player2.getCardHand();
+    for(int itereator = 0; itereator!= player2Hand.size(); itereator++){
+        Card card = player2Hand.at(itereator);
         qDebug()<<card.getValue()<<"\n";
         CardDrawing *cardDrawing = new CardDrawing();
         QPixmap pixmap = QPixmap(QString::fromStdString(card.convert()));
@@ -73,9 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->player2Layout->addWidget(cardDrawing);
     }
 
-    std::vector<Card> * player3Hand = player3.getCardHand();
-    for(int itereator = 0; itereator!= player3Hand->size(); itereator++){
-        Card card = player3Hand->at(itereator);
+    std::vector<Card>  player3Hand = player3.getCardHand();
+    for(int itereator = 0; itereator!= player3Hand.size(); itereator++){
+        Card card = player3Hand.at(itereator);
         qDebug()<<card.getValue()<<"\n";
         CardDrawing *cardDrawing = new CardDrawing();
         QPixmap pixmap = QPixmap(QString::fromStdString(card.convert()));
@@ -105,7 +105,7 @@ void MainWindow::gameDecider(Table *table){
     vector<Card> temp;
     vector<int> values;
     for(std::list< Player >::iterator it=table->playerListBegin();it!=table->playerListEnd();it++){
-        temp = *((*it).getCardHand());
+        temp = ((*it).getCardHand());
         int value=0;
         for(std::vector<Card>::iterator itcard=temp.begin();itcard!=temp.end();itcard++){
             value+=(*itcard).getValue();
