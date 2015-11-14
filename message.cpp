@@ -11,6 +11,10 @@ Message::Message()
 Message::Message(MessageType type){
 
     m_type = type;
+    dataStrings.clear();
+    tables.clear();
+    cards.clear();
+    players.clear();
 }
 
 void Message::setMessageType(const MessageType &mtype){
@@ -157,3 +161,11 @@ QDataStream &  operator >>(QDataStream & stream, Message &message){
     return stream;
 }
 
+
+void Message::clearContainers()
+{
+    dataStrings.clear();
+    tables.clear();
+    cards.clear();
+    players.clear();
+}

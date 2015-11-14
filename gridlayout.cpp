@@ -7,6 +7,7 @@
 #include "playerdrawing.h"
 #include "player.h"
 #include "message.h"
+#include <QMessageBox>
 
 GridLayout::GridLayout(QWidget *parent) :
     QMainWindow(parent),
@@ -102,8 +103,10 @@ GridLayout::GridLayout(Table table_, QString nickName_, QWidget *parent) :
 
 
 void GridLayout::processPendingDatagrams()
-{   Message message;
+{
     while (udpSocket->hasPendingDatagrams()) {
+        Message message;
+       // message.clearContainers();
         QByteArray datagram;
         datagram.resize(udpSocket->pendingDatagramSize());
         udpSocket->readDatagram(datagram.data(), datagram.size());
@@ -132,7 +135,10 @@ void GridLayout::processPendingDatagrams()
                        qDebug() << player.getName();
                        if(nickName.compare(player.getName()) == 0)
                        {
-                           playerDrwaing->enableHitFoldButton();
+                           if(!(player.isFold()))
+                           {
+                               playerDrwaing->enableHitFoldButton();
+                           }
                            connect(playerDrwaing,SIGNAL(foldButtonPressed()),this,SLOT(sendFoldMessage()));
                            connect(playerDrwaing,SIGNAL(hitButtonPressed()),this,SLOT(sendHitMessage()));
                        }
@@ -178,6 +184,20 @@ void GridLayout::processPendingDatagrams()
                    table.foldPlayerWithName(cmd[0]);
                }
 
+           }
+           else if(mtype == MessageType::GameOver)
+           {
+               QString coma = ",";
+               QString winnersName = " ";
+               std::vector<QString> winners = message.getDataStrings();
+               for(QString winner : winners)
+               {
+                    winnersName.append(coma);
+                    winnersName.append(winner);
+               }
+               QMessageBox::information(this, tr("Black Jack"),
+                                        tr("The following player(s) won: %1.")
+                                        .arg(winnersName));
            }
 
     }
