@@ -105,8 +105,8 @@ GridLayout::GridLayout(Table table_, QString nickName_, QWidget *parent) :
 void GridLayout::processPendingDatagrams()
 {
     while (udpSocket->hasPendingDatagrams()) {
-        Message message;
-       // message.clearContainers();
+        Message message = Message();
+        message.clearContainers();
         QByteArray datagram;
         datagram.resize(udpSocket->pendingDatagramSize());
         udpSocket->readDatagram(datagram.data(), datagram.size());

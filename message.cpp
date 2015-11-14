@@ -118,10 +118,8 @@ QDataStream & operator <<(QDataStream & stream, const Message &message){
 
 QDataStream &  operator >>(QDataStream & stream, Message &message){
     MessageType mtype;
-    QString stringObj;
-    Table tableObj;
-    Player playerObj;
-    Card cardObj = Card();
+
+
     int dataStringsSize;
     int numberOfTables;
     int numberOfCards;
@@ -138,22 +136,24 @@ QDataStream &  operator >>(QDataStream & stream, Message &message){
     message.setMessageType(mtype);
 
     for(int i=0;i<dataStringsSize;i++)
-    {
+    {  QString stringObj = QString();
+
         stream>>stringObj;
         message.insertDataString(stringObj);
     }
     for(int i=0; i<numberOfTables; i++)
-    {
+    {Table tableObj = Table();
+
         stream >> tableObj;
         message.insertTable(tableObj);
     }
     for(int i=0; i<numberOfCards; i++)
-    {
+    {   Card cardObj = Card();
         stream >> cardObj;
         message.insertCard(cardObj);
     }
     for(int j = 0; j < numberOfPlayers; j++ )
-    {
+    {   Player playerObj = Player();
         stream >> playerObj;
         message.insertPlayer(playerObj);
     }
