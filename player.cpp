@@ -1,5 +1,6 @@
 #include "player.h"
 #include <QDataStream>
+#include <QDebug>
 
 Player::Player()
 {
@@ -31,10 +32,10 @@ int Player::addCardToHand(Card card)
 {  // returnVal = 0 => card is added and not autoFold
    // returnVal = 1 => card is added but auto fold due to sum >= 17
    // returnVal = 2 => not able to add the card due to already fold
-
+   qDebug() << nick_name << "Player name";
 
     int returnVal = 0;
-    if(fold){
+    if(fold == true){
         returnVal = 2;
     }
     else{
@@ -44,6 +45,7 @@ int Player::addCardToHand(Card card)
         sum = sum + cardp.getValue();
     }
     sum = sum + card.getValue();
+    qDebug() << sum << "sum value";
     if(sum >= 17){
         // autofold
        fold = true;
@@ -51,6 +53,7 @@ int Player::addCardToHand(Card card)
     }
     hand.push_back(card);
     }
+
     return returnVal;
 }
 
@@ -108,10 +111,19 @@ QDataStream & operator >>(QDataStream & stream, Player & player){
     int handSize;
     stream >> handSize;
     Card card;
+    if(fold == true)
+    {
+        player.setFold(false);
+    }
     for(int i =0 ; i < handSize ; i++)
     {
      stream >> card;
+
      player.addCardToHand(card);
+    }
+    if(fold == true)
+    {
+        player.setFold(true);
     }
     return stream;
 }

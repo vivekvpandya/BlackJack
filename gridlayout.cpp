@@ -91,6 +91,7 @@ GridLayout::GridLayout(Table table_, QString nickName_, QWidget *parent) :
     udpSocket->bind(QHostAddress::AnyIPv4,table.getPortNo(), QUdpSocket::ShareAddress);
     udpSocket->joinMulticastGroup(groupAddress);
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));
+    udpSocket->setSocketOption(QAbstractSocket::MulticastLoopbackOption,QVariant(1));
     qDebug() << "GridLayout is created";
     qDebug() << table.getPortNo() ;
     Message message = Message(MessageType::GetTableDetails); // A joinRoom Message
