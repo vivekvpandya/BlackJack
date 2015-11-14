@@ -48,6 +48,7 @@ public:
     void insertPlayer(Player player);
     std::vector<Player> getPlayers() const;
     void clearContainers();
+    void printEmAll();
 
 private:
     MessageType m_type;

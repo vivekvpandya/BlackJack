@@ -99,6 +99,7 @@ GridLayout::GridLayout(Table table_, QString nickName_, QWidget *parent) :
     out.setVersion(QDataStream::Qt_5_5);
     out << message;
     udpSocket->writeDatagram(datagram, groupAddress, table.getPortNo());
+    udpSocket->flush();
 }
 
 
@@ -116,6 +117,7 @@ void GridLayout::processPendingDatagrams()
            QDataStream in(&datagram, QIODevice::ReadOnly);
            in.setVersion(QDataStream::Qt_5_5);
            in >> message;
+           message.printEmAll();
            MessageType mtype = message.getMessageType();
            if(mtype == MessageType::GameDetails){
                // This will be one time message sent by Dealer when game begins
@@ -220,6 +222,8 @@ void GridLayout::sendFoldMessage()
     message.insertDataString(nickName);
     out << message;
     udpSocket->writeDatagram(datagram, groupAddress, table.getPortNo());
+    udpSocket->flush();
+    message.printEmAll();
 }
 void GridLayout::sendHitMessage()
 {
@@ -231,4 +235,6 @@ void GridLayout::sendHitMessage()
     message.insertDataString(nickName);
     out << message;
     udpSocket->writeDatagram(datagram, groupAddress, table.getPortNo());
+    udpSocket->flush();
+    message.printEmAll();
 }
