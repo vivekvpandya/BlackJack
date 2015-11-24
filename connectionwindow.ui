@@ -92,7 +92,7 @@
       <item>
        <widget class="QLineEdit" name="nickName">
         <property name="text">
-         <string>Jatu</string>
+         <string>Vivek</string>
         </property>
        </widget>
       </item>
